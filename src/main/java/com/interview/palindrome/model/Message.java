@@ -1,13 +1,19 @@
 package com.interview.palindrome.model;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
+
+import java.time.OffsetDateTime;
 
 public class Message {
 
     private String content;
-    private LocalDateTime timestamp;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
+    @JsonSerialize(using = OffsetDateTimeSerializer.class)
+    private OffsetDateTime timestamp;
 
-    public Message(String content, LocalDateTime timestamp) {
+    public Message(String content, OffsetDateTime timestamp) {
         this.content = content;
         this.timestamp = timestamp;
     }
@@ -20,11 +26,11 @@ public class Message {
         this.content = content;
     }
 
-    public LocalDateTime getTimestamp() {
+    public OffsetDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(OffsetDateTime timestamp) {
         this.timestamp = timestamp;
     }
 

@@ -1,10 +1,14 @@
 package com.interview.palindrome.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Entity(name="ProcessedMessage")
@@ -14,13 +18,15 @@ public class ProcessedMessage {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long messageId;
     private String content;
-    private LocalDateTime timestamp;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
+    @JsonSerialize(using = OffsetDateTimeSerializer.class)
+    private OffsetDateTime timestamp;
     private Integer longestPalindromeSize;
 
     public ProcessedMessage() {
     }
 
-    public ProcessedMessage(String content, LocalDateTime timestamp, Integer longestPalindromeSize) {
+    public ProcessedMessage(String content, OffsetDateTime timestamp, Integer longestPalindromeSize) {
         this.content = content;
         this.timestamp = timestamp;
         this.longestPalindromeSize = longestPalindromeSize;
@@ -34,11 +40,11 @@ public class ProcessedMessage {
         this.content = content;
     }
 
-    public LocalDateTime getTimestamp() {
+    public OffsetDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(OffsetDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
