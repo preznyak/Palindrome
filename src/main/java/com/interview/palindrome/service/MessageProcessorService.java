@@ -25,7 +25,7 @@ public class MessageProcessorService {
 
     public void saveMessage(Message message) {
         ProcessedMessage processedMessage = modelMapper.map(message, ProcessedMessage.class);
-        processedMessage.setLongestPalindromeSize(palindromeFinder.findLongestPalindrome(message.getContent()));
+        processedMessage.setLongestPalindromeSize(palindromeFinder.findLongestPalindrome(processedMessage.getContent()));
         processedMessageRepository.save(processedMessage);
     }
 

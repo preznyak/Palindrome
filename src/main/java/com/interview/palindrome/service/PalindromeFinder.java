@@ -7,14 +7,13 @@ public class PalindromeFinder {
 
     public int findLongestPalindrome(String content) {
         String longest = content.substring(0, 1);
+        String palindrome;
         for (int i = 0; i < content.length() - 1; i++) {
-            //odd cases like 121
-            String palindrome = intermediatePalindrome(content, i, i);
-            if (palindrome.length() > longest.length()) {
-                longest = palindrome;
+            if (content.length() % 2 == 0) {
+                palindrome = intermediatePalindrome(content, i, i + 1);
+            } else {
+                palindrome = intermediatePalindrome(content, i, i);
             }
-            //even cases like 1221
-            palindrome = intermediatePalindrome(content, i, i + 1);
             if (palindrome.length() > longest.length()) {
                 longest = palindrome;
             }
