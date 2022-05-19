@@ -10,8 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+import static com.interview.palindrome.constant.MessageConstants.MESSAGE_SAVED_SUCCESSFULLY;
 
 @RestController
 @RequestMapping("message-rest")
@@ -27,7 +28,7 @@ public class MessageController {
     }
 
     @GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ProcessedMessage>> getProcessedMessage() {
+    public ResponseEntity<List<ProcessedMessage>> getProcessedMessages() {
         return new ResponseEntity<>(messageProcessorService.findAll(), HttpStatus.OK);
     }
 
@@ -38,7 +39,7 @@ public class MessageController {
             return new ResponseEntity<>(result.getMessage(),HttpStatus.BAD_REQUEST);
         }
         messageProcessorService.saveMessage(message);
-        return new ResponseEntity<>("Message saved successfully",HttpStatus.OK);
+        return new ResponseEntity<>(MESSAGE_SAVED_SUCCESSFULLY,HttpStatus.OK);
     }
 
 }
