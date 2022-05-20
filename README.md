@@ -19,5 +19,7 @@ docker build -t palindrome:latest .
 docker run -p 8090:8080 palindrome
 ```
 Now you have the application up and running on port 8090.
-For trying it out, please import the PalindromeCollectionForDocker.postman_collection.json collection into your [Postman](https://www.postman.com/)
+
+## Usage
+Please import the PalindromeCollectionForDocker.postman_collection.json collection into your [Postman](https://www.postman.com/).
 
