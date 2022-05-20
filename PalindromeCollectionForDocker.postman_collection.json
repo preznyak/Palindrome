@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "8dbb669e-1ce2-4e99-a873-e92795a79045",
+		"name": "PalindromeCollectionForDocker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetDummyProcessedMessage On Docker",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/v1/messages/findAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"messages",
+						"findAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostMessage On Docker",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\": \"abrakadabra\",\r\n    \"timestamp\": \"2022-05-18T20:28:44+0100\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/messages/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"messages",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

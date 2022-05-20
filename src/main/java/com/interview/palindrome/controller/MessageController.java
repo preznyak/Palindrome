@@ -10,12 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 import static com.interview.palindrome.constant.MessageConstants.MESSAGE_SAVED_SUCCESSFULLY;
 
 @RestController
-@RequestMapping("message-rest")
+@RequestMapping("/v1")
 public class MessageController {
 
     MessageProcessorService messageProcessorService;
@@ -33,7 +34,7 @@ public class MessageController {
      * @return the list of the processed messages inside a
      * ResponseEntity object with an HTTP status.
      */
-    @GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/messages/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ProcessedMessage>> getProcessedMessages() {
         return new ResponseEntity<>(messageProcessorService.findAll(), HttpStatus.OK);
     }
@@ -44,7 +45,7 @@ public class MessageController {
      * @return a ResponseEntity object containing the response message
      * and the HTTP status.
      */
-    @PostMapping(value = "/message", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/messages/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addMessage(@RequestBody Message message) {
         ValidatorResult result = messageValidator.validate(message);
         if (!result.isValid()) {
