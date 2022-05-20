@@ -23,6 +23,12 @@ public class MessageProcessorService {
         this.processedMessageRepository = processedMessageRepository;
     }
 
+    /**
+     * <p>This method is used to persist the messages.
+     * The longestPalindromeSize value is calculated with the help
+     * of the PalindromeFinder class.</p>
+     * @param message the message what the user wants to persist
+     */
     public void saveMessage(Message message) {
         ProcessedMessage processedMessage = modelMapper.map(message, ProcessedMessage.class);
         processedMessage.setLongestPalindromeSize(palindromeFinder.findLongestPalindrome(processedMessage.getContent()));

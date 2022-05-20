@@ -27,11 +27,23 @@ public class MessageController {
         this.messageValidator = messageValidator;
     }
 
+    /**
+     * <p>This is a method used for getting all the persisted and
+     * processed messages from the database.</p>
+     * @return the list of the processed messages inside a
+     * ResponseEntity object with an HTTP status.
+     */
     @GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ProcessedMessage>> getProcessedMessages() {
         return new ResponseEntity<>(messageProcessorService.findAll(), HttpStatus.OK);
     }
 
+    /**
+     * <p>This method is used to add a new message.</p>
+     * @param message the message what the user wants to add
+     * @return a ResponseEntity object containing the response message
+     * and the HTTP status.
+     */
     @PostMapping(value = "/message", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addMessage(@RequestBody Message message) {
         ValidatorResult result = messageValidator.validate(message);

@@ -9,14 +9,15 @@ import java.time.OffsetDateTime;
 
 public class TestMessageValidator {
 
-    private static final String TEST_CONTENT = "TestContent";
+    private static final String VALID_CONTENT = "TestContent";
+    private static final String INVALID_CONTENT = "12354Invalid";
     private static final OffsetDateTime TEST_DATE_TIME = OffsetDateTime.now();
 
     MessageValidator messageValidator = new MessageValidator();
 
     @Test
     public void testMessageValidator_ShouldReturnValid() {
-        Message testMessage = new Message(TEST_CONTENT, TEST_DATE_TIME);
+        Message testMessage = new Message(VALID_CONTENT, TEST_DATE_TIME);
         ValidatorResult validatorResult = messageValidator.validate(testMessage);
         Assertions.assertTrue(validatorResult.isValid());
         Assertions.assertEquals(MessageConstants.OK, validatorResult.getMessage());
@@ -32,7 +33,7 @@ public class TestMessageValidator {
 
     @Test
     public void testMessageValidator_ShouldReturnInvalidTimestampIsNull() {
-        Message testMessage = new Message(TEST_CONTENT, null);
+        Message testMessage = new Message(VALID_CONTENT, null);
         ValidatorResult validatorResult = messageValidator.validate(testMessage);
         Assertions.assertFalse(validatorResult.isValid());
         Assertions.assertEquals(MessageConstants.CONTENT_AND_TIMESTAMP_SHOULD_NOT_BE_EMPTY, validatorResult.getMessage());
@@ -44,5 +45,13 @@ public class TestMessageValidator {
         ValidatorResult validatorResult = messageValidator.validate(testMessage);
         Assertions.assertFalse(validatorResult.isValid());
         Assertions.assertEquals(MessageConstants.CONTENT_AND_TIMESTAMP_SHOULD_NOT_BE_EMPTY, validatorResult.getMessage());
+    }
+
+    @Test
+    public void testMessageValidator_ShouldReturnInvalidInvalidContent() {
+        Message testMessage = new Message(INVALID_CONTENT, TEST_DATE_TIME);
+        ValidatorResult validatorResult = messageValidator.validate(testMessage);
+        Assertions.assertFalse(validatorResult.isValid());
+        Assertions.assertEquals(MessageConstants.INVALID_CONTENT, validatorResult.getMessage());
     }
 }
